@@ -1,0 +1,10 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "auth": {
+      "crna336eacb9": [
+        "read"
+      ]
+    }
+  }
+}

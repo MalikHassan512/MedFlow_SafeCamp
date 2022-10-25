@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "359993895903",
+    "project_id": "med-flow",
+    "storage_bucket": "med-flow.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359993895903:android:853e5b98aabc581df8b26a",
+        "android_client_info": {
+          "package_name": "com.ajubran.MedFlow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359993895903-l70fl4g25na10tnvqccara58cdjimkab.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ajubran.MedFlow",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "359993895903-pm59tmsrrl6o9vl3e5rssh2llh8ckaij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ajubran.MedFlow",
+            "certificate_hash": "ca9f3e41dde7d249da9c5eebb041583089656e56"
+          }
+        },
+        {
+          "client_id": "359993895903-8tnkismtke0la14m63urs3rf40mqks4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCestexSkkvpbvbMGqBGW9JIzIFRK5f7TM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359993895903-8tnkismtke0la14m63urs3rf40mqks4t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "359993895903-1b2ueunf2qleb64s9h1mbe4tmei7j4ng.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ajubran.MedFlow"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

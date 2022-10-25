@@ -1,0 +1,29 @@
+{
+  "name": "adminqueries",
+  "version": "1.0.0",
+  "description": "Administrative actions for Amazon Cognito",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "lambda-build -f . -a ../adminqueries.zip"
+  },
+  "author": "Richard Threlkeld",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "aws-sdk": "^2.845.0",
+    "aws-serverless-express": "^3.3.5",
+    "nodemailer": "^6.7.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.17.1",
+    "uuid": "^8.3.2",
+    "axios": "^0.25.0",
+    "graphql": "^16.3.0",
+    "graphql-tag": "^2.12.6",
+    "papaparse": "^5.3.1",
+    "pg": "^8.7.3",
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "aws-lambda-build": "^1.0.7"
+  }
+}

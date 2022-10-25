@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "api": {
+      "amplifyDatasource": [
+        "Query",
+        "Mutation"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

@@ -1,0 +1,117 @@
+div(style='padding: 10px 30px 10px 30px;')
+  img(src='https://medflow-images.s3.eu-west-1.amazonaws.com/safecamp_BRAND.1-nobg.png' alt='bg immg' style='height: auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; opacity: .4 ')
+  div(style='position:relative; z-index: 2;')
+    span(style='font-size: 32px; font-weight: bold; margin-bottom: 0px') #{lab.name.S}
+    span(style='position: absolute; right: 30; top: 30; font-weight: bold; color: red') FINAL
+    br
+    span(style='font-size: 18px; font-weight: 100;') #{lab.street.S}
+    br
+    span(style='font-size: 18px; font-weight: 100;') #{lab.city_state_zip.S}
+    br
+    span(style='font-size: 18px; font-weight: 100;') Phone: #{lab.contact_phone.S}
+    br
+    hr(style='width: 100%')
+    table(style='width: 100%; text-align: left;')
+      tr
+        th(style='font-weight: 400; font-size: 14px;') Patient:
+        th(style='font-weight: 400; font-size: 14px;') #{empDemos.firstName} #{empDemos.lastName}
+        th(style='font-weight: 400; font-size: 14px;')
+        th(style='font-weight: 400; font-size: 14px;')
+        th(style='font-weight: 400; font-size: 14px;') Accession:
+        th(style='font-weight: 400; font-size: 14px;') #{test.barcode}
+      tr
+        td(style='font-size: 14px;') Patient #:
+        td(style='font-size: 14px;') #{test.employeeID}
+        td(style='font-size: 14px;') Birth:
+        td(style='font-size: 14px;') #{dob}
+        td(style='font-size: 14px;')
+        td(style='font-size: 14px;')
+      tr
+        td(style='font-size: 14px;') Doctor:
+        td(style='font-size: 14px;') #{lab.lab_director.S}
+        td(style='font-size: 14px;') Age:
+        td(style='font-size: 14px;') #{age} years
+        td(style='font-size: 14px;') Collection Date:
+        td(style='font-size: 14px;') #{createdAt}
+      tr
+        td(style='font-size: 14px;') Phone:
+        td(style='font-size: 14px;') #{test.phoneNumber}
+        td(style='font-size: 14px;') Gender:
+        td(style='font-size: 14px;') #{empDemos.sex}
+        td(style='font-size: 14px;') Received Date:
+        td(style='font-size: 14px;') #{createdAt}
+      tr
+        td
+        td
+        td
+        td
+        td
+        td
+      tr
+        td
+        td
+        td
+        td
+        td
+        td
+      tr
+        td
+        td
+        td
+        td
+        td
+        td
+      tr
+        td
+        td
+          span(style='font-size: 14px;') #{empDemos.lastName}, #{empDemos.firstName}
+          br
+          span(style='font-size: 14px;') #{empDemos.street}
+          br
+          span(style='font-size: 14px;') #{empDemos.city}, #{empDemos.state}
+        td
+        td
+        td
+        td
+    br
+    table(style='width: 100%; text-align: left; border: 1px solid black; border-collapse: collapse;')
+      tr
+        th(style='font-weight: bold; text-align: left; border: 1px solid black; border-collapse: collapse; font-size: 14px;') Test Name
+        th(style='font-weight: bold; text-align: left; border: 1px solid black; border-collapse: collapse; font-size: 14px;') Result
+        th(style='font-weight: bold; text-align: left; border: 1px solid black; border-collapse: collapse; font-size: 14px;') Units
+        th(style='font-weight: bold; text-align: left; border: 1px solid black; border-collapse: collapse; font-size: 14px;') Flag
+        th(style='font-weight: bold; text-align: left; border: 1px solid black; border-collapse: collapse; font-size: 14px;') Reference Range/Cutoff
+      tr
+        td(style='font-weight: bold; font-size: 14px;') 2019-nCoV rRT-#{testType}
+        td
+        td
+        td
+        td(style='text-align: right; font-size: 12px;')
+          i Run on #{createdAt}
+      tr
+        td(style='font-size: 14px;') 2019-nCoV
+        td(style='font-size: 14px;') #{test.result.toLowerCase() === "positive" ? "Detected" : "Not Detected"}
+        td
+        td
+        td(style='font-size: 14px;') #{test.result.toLowerCase() === "positive" ? "Detected" : "Not Detected"}
+    div
+      p(style='font-size: 14px;') Notes: 
+      p(style='padding: 0 5% 0 10%; font-size: 14px; max-height: 25rem; text-overflow: ellipsis; overflow: hidden; white-space: pre-line;') #{lab.testing_notes.S}
+  div(style='position: absolute; bottom: 30; left: 30; right: 30;')
+    span(style='font-weight: 600; display:table; margin:0 auto; font-size: 14px;') CLIA ##{lab.clia_number}
+    br
+    span(style='font-weight: 600; display:table; margin-left: auto; margin-right: auto; margin-top: -15; font-size: 14px;') Laboratory Director: Dr. #{lab.lab_director.S}
+    hr(style='width: 100%')
+    table(style='width: 100%')
+      tr
+        th(style='text-align: left; font-size: 12px; font-weight: 400;') Originally Reported On #{createdAt}
+        th
+        th(style='text-align: right; font-size: 12px; font-weight: 400;') Accession: #{test.barcode} Patient #: #{test.employeeID}
+      tr
+        td(style='text-align: left; font-size: 12px;') Printed: #{new Date(Date.now()).toLocaleString()}
+        td
+        td(style='text-align: right; font-size: 12px;') Lab Results for: #{empDemos.lastName}, #{empDemos.firstName}
+      tr
+        td(style='text-align: left; font-size: 12px;') (UTC-08:00) Pacific Time (US &amp; Canada) 
+        td(style='font-size: 12px;') STAT[S] Corrected [C] Amended [A]
+        td(style='text-align: right; font-size: 12px;') Page: 1/1

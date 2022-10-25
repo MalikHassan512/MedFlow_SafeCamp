@@ -1,0 +1,22 @@
+[
+    {
+        "groupName": "Admins",
+        "precedence": 1
+    },
+    {
+        "groupName": "Testers",
+        "precedence": 2
+    },
+    {
+        "groupName": "Labs",
+        "precedence": 3
+    },
+    {
+        "groupName": "Employees",
+        "precedence": 4
+    },
+    {
+        "groupName": "Employers",
+        "precedence": 5
+    }
+]

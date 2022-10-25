@@ -1,0 +1,402 @@
+type Lab
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, update] }
+      { allow: groups, groups: ["Labs"], operations: [read] }
+      { allow: groups, groups: ["Employers"], operations: [read] }
+      { allow: groups, groups: ["Employees"], operations: [read] }
+      { allow: groups, groups: ["Clients"], operations: [read] }
+      { allow: public, operations: [read, update] }
+    ]
+  ) {
+  id: ID!
+  name: String
+  logo: String
+  Tests: [Test] @connection(keyName: "byLab", fields: ["id"])
+  contact_name: String
+  contact_phone: AWSPhone
+  user_id: String
+  contact_email: AWSEmail
+  tubes_provided: Boolean
+  lab_director: String
+  clia_number: String
+  testing_notes: String
+  street: String
+  city_state_zip: String
+  lab_contacts: [String]
+  default_antigen: Boolean
+  antigen_notes: String
+  default_molecular: Boolean
+  default_other: Boolean
+  molecular_notes: String
+  other_notes: String
+  sendInsurance: Boolean
+  barCodeProvided: Boolean
+  barCodeAlertLimit: Int
+  whiteLabel: Boolean
+  whiteLabelPackage: String
+  showOnSummaryScreen: Boolean
+  orderCodes: [String]
+  isArchive: Boolean
+  positiveCount: Int
+  negativeCount: Int
+  postitiveDate: AWSDateTime
+  totalTest: Int
+}
+
+type Site
+  @model
+  @key(name: "byClient", fields: ["clientID"])
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, update] }
+      { allow: groups, groups: ["Labs"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Employers"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Clients"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Employees"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  name: String
+  clientID: ID
+  Tests: [Test] @connection(keyName: "bySite", fields: ["id"])
+  contact_name: String
+  contact_phone: AWSPhone
+  contact_email: AWSEmail
+  antigen: Boolean
+  automateTestType: String
+  user_id: String
+  show_contacts: [String]
+  insurance_required: Boolean
+  sendInsuranceCard: Boolean
+  resetTestDay: String
+  startDate: AWSDate
+  endDate: AWSDate
+  orderKitDate: AWSDateTime
+  orderQuantity: Int
+  enableShipment: Boolean
+  showOnSummaryScreen: Boolean
+  messageTested: String
+  messageResulted: String
+  messagePositive: String
+  printLabel: String
+  isArchive: Boolean
+  isLucira: Boolean
+  vaccinationCard: Boolean
+  externalTest: Boolean
+  externalTestType: String
+  externalTestDuration: String
+  externalTestAdmit: Boolean
+  patternTesting: Boolean
+  patternHippa: String
+  preRegistration: Boolean
+  admit: Boolean
+  positiveCount: Int
+  negativeCount: Int
+  postitiveDate: AWSDateTime
+  totalTest: Int
+}
+
+type Client
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, update] }
+      { allow: groups, groups: ["Labs"], operations: [read] }
+      { allow: groups, groups: ["Employers"], operations: [read] }
+      { allow: groups, groups: ["Clients"], operations: [read] }
+      { allow: groups, groups: ["Employees"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  Tests: [Test] @connection(keyName: "byClient", fields: ["id"])
+  Employees: [Employee] @connection(keyName: "byClient", fields: ["id"])
+  name: String
+  Sites: [Site] @connection(keyName: "byClient", fields: ["id"])
+  contact_name: String
+  contact_phone: AWSPhone
+  contact_email: AWSEmail
+  hippa: String
+  hippaFile: String
+  resultType: String
+  showOnSummaryScreen: Boolean
+  whiteLabel: Boolean
+  whiteLabelPackage: String
+  isArchive: Boolean
+  positiveCount: Int
+  negativeCount: Int
+  postitiveDate: AWSDateTime
+  totalTest: Int
+}
+
+type Employee
+  @model
+  @key(name: "byClient", fields: ["clientID"])
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Labs"], operations: [read] }
+      { allow: groups, groups: ["Employers"], operations: [read, create, update] }
+      { allow: groups, groups: ["Clients"], operations: [read, create, update] }
+      { allow: groups, groups: ["Employees"], operations: [read, create, update] }
+      { allow: public, operations: [create] }
+      { allow: public, provider: apiKey, operations: [read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  first: String
+  last: String
+  dob: AWSDate
+  id_number: String
+  clientID: ID
+  Tests: [Test] @connection(keyName: "byEmployee", fields: ["id"])
+  Client: Client @connection
+  street: String
+  street2: String
+  city: String
+  state: String
+  zip: String
+  countryCode: String
+  phone_number: String
+  sex: String
+  email: String
+  isVaccinated: Boolean
+  insurance_name: String
+  insurance_number: String
+  subID: ID
+  site_name: String
+  isNew: Boolean
+  isPreRegistered: Boolean
+  medflowDomain: String
+  mdID: Int
+  schrID: String
+  whiteGlove: Boolean
+  employeeType: String
+  profileImage: String
+  vaccinationCardUpload: Boolean
+  vaccinationCardImage: String
+  vaccinationDetails: String
+  vaccinationType: String
+  vaccinationDate: AWSDateTime
+  vaccinationLocation: String
+  vaccinationDateS: AWSDateTime
+  vaccinationLocationS: String
+  isExternalTest: Boolean
+  externalTestImage: String
+  externalTestDate: AWSDateTime
+  externalTestType: String
+  externalTestResult: String
+  preRegisterShowId: String
+  patternConsent: [String]
+  hippaConsent: [String]
+  insuranceScan: [String]
+  createdAt: AWSDateTime
+}
+
+type Test
+  @model
+  @key(name: "byClient", fields: ["clientID"])
+  @key(name: "byLab", fields: ["labID"])
+  @key(name: "byEmployee", fields: ["employeeID"])
+  @key(name: "bySite", fields: ["siteID"])
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Labs"], operations: [read, update] }
+      { allow: groups, groups: ["Employers"], operations: [read, create, update] }
+      { allow: groups, groups: ["Clients"], operations: [read, create, update] }
+      { allow: owner, operations: [read, create, update] }
+      { allow: private, operations: [read] }
+      { allow: public, provider: apiKey, operations: [read, create, update, delete] }
+    ]
+  ) {
+  id: ID!
+  employee: Employee @connection
+  status: String
+  client: Client @connection
+  clientID: ID
+  site: Site @connection
+  lab: Lab @connection
+  labID: ID
+  employeeID: ID
+  siteID: ID
+  baseSiteID: String
+  batch: String
+  barcode: String
+  owner: String
+  result: String
+  resultDate: AWSDate
+  resultDateTime: AWSDateTime
+  employee_demographics: AWSJSON
+  site_name: String
+  clientName: String
+  labName: String
+  phoneNumber: String
+  test_number: Int
+  email: String
+  tester_name: String
+  isAntigen: Boolean
+  referenceID: String
+  test_type: String
+  createdBy: String
+  testerPhone: String
+  submittedBy: String
+  submittedByName: String
+  StampBy: String
+  StampByName: String
+  emailSend: Boolean
+  quarantinedStart: AWSDateTime
+  quarantinedEnd: AWSDateTime
+  startTimeStamp: String
+  timerStatus: String
+  startDate: String
+  expired: Boolean
+  beenTimed: Boolean
+  done: Boolean
+  sr_no: String
+  appVer: String
+  sequenceNo: Int
+  createSource: String
+  isFalsePositive: Boolean
+  invalidResultStatus: Int
+  isLucira: Boolean
+  patternTestAnswer: String
+  schrID: String
+  schrTestID: String
+  createdAt: AWSDateTime
+  timezone: String
+}
+
+type LencoBarcodes
+  @model
+  @key(name: "byLab", fields: ["labID"])
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, update] }
+      { allow: groups, groups: ["Labs"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Employers"], operations: [read] }
+      { allow: groups, groups: ["Clients"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  labID: ID
+  barcode: String
+  available: Boolean
+  isActive: Int
+}
+
+type TestConsent
+  @model
+  @key(name: "byEmployee", fields: ["employeeID"])
+  @key(name: "bySite", fields: ["siteID"])
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, update] }
+      { allow: groups, groups: ["Labs"], operations: [read] }
+      { allow: groups, groups: ["Employers"], operations: [read] }
+      { allow: groups, groups: ["Clients"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  employeeID: ID
+  siteID: ID
+  employee: Employee @connection
+  site: Site @connection
+  isConsent: Boolean
+  isInsuranceCardScan: Boolean
+  createdAt: AWSDateTime
+}
+
+type TestTypes
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read] }
+      { allow: groups, groups: ["Labs"], operations: [read] }
+      { allow: groups, groups: ["Employers"], operations: [read] }
+      { allow: groups, groups: ["Clients"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  name: String
+  totalTime: String
+  firstAlert: String
+  secondAlert: String
+  duration: Int
+}
+
+type EmployeeBarCodes
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Labs"], operations: [read] }
+      { allow: groups, groups: ["Employers"], operations: [read] }
+      { allow: groups, groups: ["Clients"], operations: [read] }
+    ]
+  ) {
+  id: ID!
+  employeeID: ID
+  barcode: String
+  phone_number: String
+  licenceNumber: String
+  createdAt: AWSDateTime
+}
+
+type EmployeeTestCounter
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Labs"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Employers"], operations: [read, create, update, delete] }
+    ]
+  ) {
+  id: ID!
+  counter: Int
+  employeeCounter: Int
+  patternQuestion: String
+  totalTest: Int
+}
+
+type ExternalTest
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["Admins"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Testers"], operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Labs"], operations: [read, update] }
+      { allow: groups, groups: ["Employers"], operations: [read, create, update] }
+      { allow: groups, groups: ["Clients"], operations: [read, create, update] }
+      { allow: owner, operations: [read, create, update] }
+      { allow: private, operations: [read] }
+      { allow: public, provider: apiKey, operations: [update] }
+    ]
+  ) {
+  id: ID!
+  status: String
+  clientID: ID
+  employeeID: ID
+  siteID: ID
+  owner: String
+  reason: String
+  employee_demographics: AWSJSON
+  site_name: String
+  phoneNumber: String
+  tester_name: String
+  email: String
+  vaccineCardFile: String
+  externalTestFile: String
+  createdAt: AWSDateTime
+}

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "paths": {
+    "/users": {
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "guest": [
+          "read"
+        ]
+      },
+      "lambdaFunction": "usersLambda"
+    }
+  }
+}
